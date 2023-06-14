@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useQuery } from "react-query";
+
 import { searchForShows , searchForPeople } from "../api/tvmaze";
 import SearchForm from "../components/SearchFrom";
-
 import ShowGrid from "../components/shows/ShowGrid";
 import ActorsGrid from "../components/actors/ActorsGrid";
 
@@ -9,35 +10,22 @@ import ActorsGrid from "../components/actors/ActorsGrid";
 
 const Home = ()  =>{
 
-    
-    const [apiData , setApiData] = useState(null);
-    const [apiDataError , setApiDataError] = useState(null);
+    const [filter , setFilter ] = useState(null);
+    const {data: apiData ,error : apiDataError} = useQuery({
 
-    // shows or actors
-
-  
-   
+        queryKey: ['search', filter],
+        queryFn: () => filter.searchOption === 'shows' 
+        ? searchForShows (filter.q) 
+        : searchForPeople(filter.q),
+        enabled: !!filter,
+        refetchOnWindowFocus:false,
+    })
 
     const onSearch = async({q,searchOption}) =>{
-    
-
-        try{
-            setApiDataError(null);
-            let result;
-            
-            if(searchOption === 'shows'){
-                result = await searchForShows(q);}
-            else{
-                result = await searchForPeople(q);}
-            setApiData(result);
-        } catch(error){
-            setApiDataError(error);
-        }
-        
+        setFilter({q,searchOption})
     };  
 
     const renderApiData = () =>{
-
         if(apiDataError){
             return <div>Error occured : {apiDataError.message}</div>;
         }
@@ -49,22 +37,15 @@ const Home = ()  =>{
         if(apiData) {
             return apiData[0].show ? <ShowGrid shows ={apiData}/> : <ActorsGrid actors = {apiData}/> ;
         }
-
         return null;
     }
-
     return( 
     <div>
         <SearchForm onSearch = {onSearch}/>
         <div>
-
             {renderApiData()}
-        
         </div>
-        
     </div>
     )
 };
-
-
 export default Home;

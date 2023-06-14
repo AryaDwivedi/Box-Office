@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState,  } from "react";
 
 
 const SearchForm = ({onSearch}) =>{
@@ -25,9 +25,6 @@ const SearchForm = ({onSearch}) =>{
 
         onSearch(options);
     }
-
-
-
 
     return( 
     <form onSubmit={onSubmit}>
