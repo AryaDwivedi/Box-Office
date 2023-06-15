@@ -8,9 +8,14 @@ import ActorsGrid from "../components/actors/ActorsGrid";
 
 
 
+
 const Home = ()  =>{
 
     const [filter , setFilter ] = useState(null);
+
+
+
+
     const {data: apiData ,error : apiDataError} = useQuery({
 
         queryKey: ['search', filter],
@@ -42,6 +47,7 @@ const Home = ()  =>{
     return( 
     <div>
         <SearchForm onSearch = {onSearch}/>
+       
         <div>
             {renderApiData()}
         </div>

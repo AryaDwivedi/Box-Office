@@ -11,9 +11,7 @@ import Show from './pages/Show';
 const queryClient = new QueryClient()
 
 function App() {
-
-  
-  return (
+return (
 
     <QueryClientProvider client={queryClient}>
     <BrowserRouter>

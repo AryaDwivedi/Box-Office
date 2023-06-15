@@ -7,7 +7,6 @@ import Details from '../components/shows/Details';
 import Seasons from '../components/shows/Seasons';
 import Cast from '../components/shows/Cast';
 
-
 const Show= ()=>{
     const { showId }  = useParams();
     
@@ -22,8 +21,6 @@ const Show= ()=>{
     }
     if(showData ){
         return <div>
-
-
             <Link to="/">Home</Link>
 
             <ShowMainData 
@@ -36,12 +33,10 @@ const Show= ()=>{
                 <h2>Details</h2>
                 <Details status ={showData.status} premiered ={showData.premiered} network ={showData.network} />
             </div>
-
             <div>
                 <h2>Seasons</h2>
                 <Seasons  seasons= {showData._embedded.seasons}/>
             </div>
-
             <div>
                 <h2>Cast</h2>
                 <Cast cast ={showData._embedded.cast} />
@@ -52,5 +47,4 @@ const Show= ()=>{
         <div>Data is loading</div>
     )
 }
-
 export default Show;
