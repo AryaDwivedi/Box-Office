@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-
 import { searchForShows , searchForPeople } from "../api/tvmaze";
 import SearchForm from "../components/SearchFrom";
 import ShowGrid from "../components/shows/ShowGrid";
 import ActorsGrid from "../components/actors/ActorsGrid";
+import { TextCenter } from "../components/common/TextCenter";
 
 
 
@@ -12,9 +12,6 @@ import ActorsGrid from "../components/actors/ActorsGrid";
 const Home = ()  =>{
 
     const [filter , setFilter ] = useState(null);
-
-
-
 
     const {data: apiData ,error : apiDataError} = useQuery({
 
@@ -32,11 +29,11 @@ const Home = ()  =>{
 
     const renderApiData = () =>{
         if(apiDataError){
-            return <div>Error occured : {apiDataError.message}</div>;
+            return <TextCenter>Error occured : {apiDataError.message}</TextCenter>;
         }
 
         if(apiData?.length ===0){
-            return <div>No result</div>
+            return <TextCenter>No result</TextCenter>
         }
 
         if(apiData) {
