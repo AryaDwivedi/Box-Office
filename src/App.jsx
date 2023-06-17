@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-import {BrowserRouter , Routes ,Route } from 'react-router-dom';
+import { Routes ,Route , HashRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import Starred from './pages/Starred';
 import MainLayout from './components/MainLayout';
@@ -17,10 +17,7 @@ return (
     <QueryClientProvider client={queryClient}>
 
     <GlobalTheme >
-      
-
-    
-    <BrowserRouter>
+    <HashRouter>
     <Routes>
       <Route element = {<MainLayout/>}>
 
@@ -34,7 +31,7 @@ return (
 
       
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
   </GlobalTheme>
   </QueryClientProvider>
   );
